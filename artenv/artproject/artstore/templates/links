@@ -1,0 +1,2 @@
+<link rel="stylesheet" href="fluid-gallery.css">
+    <style  src="{% static 'css/grid-gallery.css'%}"></style>

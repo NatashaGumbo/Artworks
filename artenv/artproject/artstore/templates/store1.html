@@ -1,0 +1,78 @@
+{% include 'base.html' %}
+{% block content %}
+
+{% for display in display %}
+<div class="jumbotron" style=" weight: 100%; height: auto; background-image: url('{{MEDIA_URL}}{{display.display_image}}');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;">
+  <div class="container text-center">
+    <h1 style="color: white;">ArtWorks Store</h1>
+    <p style="color: white;">Showcasing Art Talent</p>
+  </div>
+</div>
+{% endfor %}
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{% url 'store' %}">Store Gallery</a></li>
+        <li><a href="#">About Us</a></li>
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Oil Paints</a></li>
+          <li><a href="#">Sculptures</a></li>
+          <li><a href="#">Morden Art</a></li>
+        </ul>
+      </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user" style="color: orange;"></span> Sign in</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-user" style="color: #32cd32;"></span> Sign up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart" style="color: red;"></span> Cart</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    {% for product in products %}
+        {% for product_img in product.image_set.all %}
+
+
+            <div class="col-sm-3">
+              <div class="panel panel-primary">
+                  <div class="panel-heading" ><a href="{% url 'DetailedView' product.slug %}" style="color: white;">{{product.product_title}}</a></div>
+
+                <div class="panel-body"><a href="{% url 'DetailedView' product.slug %}"><img src="{{ MEDIA_URL }}{{product_img.product_image}}" class="img-responsive" style="width:100%; height: 300px;" alt="Image"> </a> </div>
+
+                  <div class="panel-footer">Artist: {{product.artist}} |  $: {{ product.price }}</div>
+              </div>
+            </div>
+
+      {% endfor %}
+    {% endfor %}
+</div><br>
+
+<br>
+
+<footer class="container-fluid text-center">
+  <p>Gallery Store Copyright</p>
+  <form class="form-inline">Get deals:
+    <input type="email" class="form-control" size="50" placeholder="Email Address">
+    <button type="button" class="btn btn-danger">Sign Up</button>
+  </form>
+</footer>
+</div>
+{% endblock %}

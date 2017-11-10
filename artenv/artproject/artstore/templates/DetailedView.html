@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ArtWorks</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <link rel="stylesheet" src="{% static 'css/thumbnail-gallery.css'%}">
+    <style>
+        h2, h4, h3, h5,h6 p{
+            color: white;
+        }
+        body{
+        background-color: #616161;
+        }
+    </style>
+
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{% url 'store' %}">Store Gallery</a></li>
+        <li><a href="#">About Us</a></li>
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Oil Paints</a></li>
+          <li><a href="#">Sculptures</a></li>
+          <li><a href="#">Morden Art</a></li>
+        </ul>
+      </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user" style="color: orange;"></span> Sign in</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-user" style="color: #32cd32;"></span> Sign up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart" style="color: red;"></span> Cart</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+<br>
+
+
+        {% for product_img in products.image_set.all %}
+
+      <div class="row featurette">
+          <div class="col-md-5 "  >
+          <img src="{{ MEDIA_URL }}{{ product_img.product_image }}" alt="Park" style=" width: 100%; height:50%;" >
+        </div>
+        <div class="col-md-7">
+          <h2 class="featurette-heading"><strong>Title |</strong>  {{ products.product_title}} </h2>
+            <hr>
+            <h4 class="featurette-heading"> <strong>Artist |</strong><a href="{% url 'artistGalleryView' artist_details.slug %}"> {{products.artist}}</a>  </h4>
+            <h4 class="featurette-heading"> <strong>Price  | </strong>{{ products.price}} </h4>
+            <h4 class="featurette-heading"> <strong>Type  | </strong> {{ products.category}} </h4>
+            <h4 class="featurette-heading"> <strong>Contact  |</strong> {{artist_details.email}} </h4>
+
+
+            <hr>
+            <h3 class="featurette-heading"> <strong>  Description</strong> </h3>
+            <hr>
+          <p class="lead">{{ products.product_description }}</p>
+        </div>
+      </div>
+    </a>
+            {% endfor %}
+
+      <hr class="featurette-divider">
+    <footer class="container-fluid text-center">
+  <p>Gallery Store Copyright</p>
+  <form class="form-inline">Get deals:
+    <input type="email" class="form-control" size="50" placeholder="Email Address">
+    <button type="button" class="btn btn-danger">Sign Up</button>
+  </form>
+</footer>
+</div>
+</body>
+</html>
